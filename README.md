@@ -9,11 +9,7 @@ Visualize structures, estimate costs, explore heritage sites, and connect with a
 
 ---
 
-## 📸 Preview
 
-> *(Add a screenshot or screen recording here — drag and drop an image into this section on GitHub)*
-
----
 
 ## ✨ Features
 
