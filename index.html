@@ -1,0 +1,563 @@
+
+# Nirman — Complex Multi-Layer Architecture Platform
+# HTML with deeply nested structure, canvas elements, and semantic layers
+
+html_complex = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirman — Architecture, Construction & Heritage | নির্মাণ</title>
+    <meta name="description" content="Bangladesh's first spatial architecture platform. Visualize, estimate, and build with generative design tools.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ==================== LAYER 0: CANVAS BACKGROUND ==================== -->
+<canvas id="generativeCanvas" class="generative-bg"></canvas>
+
+<!-- ==================== LAYER 1: SPATIAL NAVIGATION ==================== -->
+<nav class="spatial-nav" id="spatialNav">
+    <div class="nav-layer nav-layer--back" data-depth="0.2">
+        <div class="nav-ghost-text">নির্মাণ</div>
+    </div>
+    <div class="nav-layer nav-layer--mid" data-depth="0.5">
+        <div class="nav-orbital">
+            <span class="orbital-ring"></span>
+            <span class="orbital-ring"></span>
+            <span class="orbital-ring"></span>
+        </div>
+    </div>
+    <div class="nav-layer nav-layer--front" data-depth="1.0">
+        <a href="#" class="nav-brand">
+            <div class="brand-glyph">
+                <svg viewBox="0 0 40 40" class="glyph-svg">
+                    <path d="M20 2 L38 12 L38 32 L20 38 L2 32 L2 12 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M20 2 L20 38 M2 12 L38 12 M2 32 L38 32" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+                    <circle cx="20" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="1"/>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-primary">Nirman</span>
+                <span class="brand-sub">নির্মাণ</span>
+            </div>
+        </a>
+        <div class="nav-prism">
+            <button class="prism-face" data-section="heritage" onclick="activateSection('heritage')">
+                <i class="fas fa-landmark"></i>
+                <span>Heritage</span>
+            </button>
+            <button class="prism-face active" data-section="visualize" onclick="activateSection('visualize')">
+                <i class="fas fa-cube"></i>
+                <span>Visualize</span>
+            </button>
+            <button class="prism-face" data-section="estimate" onclick="activateSection('estimate')">
+                <i class="fas fa-calculator"></i>
+                <span>Estimate</span>
+            </button>
+            <button class="prism-face" data-section="community" onclick="activateSection('community')">
+                <i class="fas fa-users"></i>
+                <span>Community</span>
+            </button>
+            <button class="prism-face" data-section="market" onclick="activateSection('market')">
+                <i class="fas fa-store"></i>
+                <span>Market</span>
+            </button>
+        </div>
+        <div class="nav-tools">
+            <button class="tool-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="tool-btn" onclick="toggleSpatialMenu()" aria-label="Menu">
+                <div class="hamburger-lines">
+                    <span></span><span></span><span></span>
+                </div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ==================== LAYER 2: HERO SPATIAL FIELD ==================== -->
+<section class="spatial-hero" id="hero">
+    <div class="hero-perspective">
+        <div class="hero-plane hero-plane--deep" data-speed="0.15">
+            <div class="hero-grid-lines"></div>
+        </div>
+        <div class="hero-plane hero-plane--mid" data-speed="0.4">
+            <div class="hero-floating-structures">
+                <div class="float-structure" style="--fx: 15%; --fy: 20%; --fz: -200px; --delay: 0s">
+                    <div class="structure-wireframe">
+                        <div class="wire-box"></div>
+                        <div class="wire-box"></div>
+                        <div class="wire-box"></div>
+                    </div>
+                </div>
+                <div class="float-structure" style="--fx: 75%; --fy: 60%; --fz: -150px; --delay: 0.5s">
+                    <div class="structure-wireframe">
+                        <div class="wire-dome"></div>
+                    </div>
+                </div>
+                <div class="float-structure" style="--fx: 60%; --fy: 15%; --fz: -300px; --delay: 1s">
+                    <div class="structure-wireframe">
+                        <div class="wire-tower"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-plane hero-plane--front" data-speed="0.8">
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="eyebrow-pulse"></span>
+                    <span>Generative Architecture Platform</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line" data-text="Build">Build</span>
+                    <span class="title-line title-line--accent" data-text="Beyond">Beyond</span>
+                    <span class="title-line" data-text="Boundaries">Boundaries</span>
+                </h1>
+                <p class="hero-desc">
+                    The first spatial design ecosystem for Bangladesh. Visualize structures in 3D space, 
+                    estimate costs with real-time material intelligence, and connect with master artisans 
+                    preserving centuries of architectural heritage.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn--primary btn--glow" onclick="scrollToSection('visualize')">
+                        <span>Start Visualizing</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn--ghost" onclick="scrollToSection('heritage')">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Explore Heritage</span>
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-cell">
+                        <div class="stat-number" data-count="2847">0</div>
+                        <div class="stat-label">Projects Visualized</div>
+                    </div>
+                    <div class="stat-cell">
+                        <div class="stat-number" data-count="156">0</div>
+                        <div class="stat-label">Heritage Sites</div>
+                    </div>
+                    <div class="stat-cell">
+                        <div class="stat-number" data-count="43">0</div>
+                        <div class="stat-label">Master Artisans</div>
+                    </div>
+                    <div class="stat-cell">
+                        <div class="stat-number" data-count="12">0</div>
+                        <div class="stat-label">Districts Active</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll-indicator">
+        <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+        </div>
+        <span>Scroll to explore layers</span>
+    </div>
+</section>
+
+<!-- ==================== LAYER 3: HERITAGE TIMELINE (Horizontal Scroll) ==================== -->
+<section class="section heritage-section" id="heritage">
+    <div class="section-header section-header--sticky">
+        <div class="container">
+            <div class="header-meta">
+                <span class="section-index">01</span>
+                <div class="section-divider"></div>
+            </div>
+            <h2 class="section-title">Architectural <span class="text-gradient">Heritage</span></h2>
+            <p class="section-subtitle">Seven centuries of Bangladeshi building traditions, mapped spatially</p>
+        </div>
+    </div>
+    
+    <div class="heritage-timeline-container">
+        <div class="heritage-timeline" id="heritageTimeline">
+            <!-- Timeline generated by JS -->
+        </div>
+    </div>
+    
+    <div class="heritage-detail-panel" id="heritageDetail">
+        <div class="detail-backdrop"></div>
+        <div class="detail-content">
+            <button class="detail-close" onclick="closeHeritageDetail()"><i class="fas fa-times"></i></button>
+            <div class="detail-visual" id="detailVisual"></div>
+            <div class="detail-info" id="detailInfo"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LAYER 4: VISUALIZE (3D Configurator) ==================== -->
+<section class="section visualize-section" id="visualize">
+    <div class="section-header">
+        <div class="container">
+            <div class="header-meta">
+                <span class="section-index">02</span>
+                <div class="section-divider"></div>
+            </div>
+            <h2 class="section-title">Spatial <span class="text-gradient">Visualizer</span></h2>
+            <p class="section-subtitle">Configure your structure with real-time generative feedback</p>
+        </div>
+    </div>
+    
+    <div class="visualizer-workspace">
+        <div class="viz-sidebar">
+            <div class="viz-panel">
+                <h3 class="panel-title"><i class="fas fa-layer-group"></i> Structure Type</h3>
+                <div class="viz-options">
+                    <button class="viz-option active" data-type="residential" onclick="setStructureType('residential')">
+                        <div class="option-icon"><i class="fas fa-home"></i></div>
+                        <span>Residential</span>
+                    </button>
+                    <button class="viz-option" data-type="commercial" onclick="setStructureType('commercial')">
+                        <div class="option-icon"><i class="fas fa-building"></i></div>
+                        <span>Commercial</span>
+                    </button>
+                    <button class="viz-option" data-type="mosque" onclick="setStructureType('mosque')">
+                        <div class="option-icon"><i class="fas fa-mosque"></i></div>
+                        <span>Mosque</span>
+                    </button>
+                    <button class="viz-option" data-type="bridge" onclick="setStructureType('bridge')">
+                        <div class="option-icon"><i class="fas fa-archway"></i></div>
+                        <span>Bridge</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="viz-panel">
+                <h3 class="panel-title"><i class="fas fa-ruler-combined"></i> Dimensions</h3>
+                <div class="viz-sliders">
+                    <div class="slider-group">
+                        <label>Length <span id="valLength">40</span> ft</label>
+                        <input type="range" min="10" max="200" value="40" id="sliderLength" oninput="updateDimension('length', this.value)">
+                        <div class="slider-track"></div>
+                    </div>
+                    <div class="slider-group">
+                        <label>Width <span id="valWidth">30</span> ft</label>
+                        <input type="range" min="10" max="150" value="30" id="sliderWidth" oninput="updateDimension('width', this.value)">
+                        <div class="slider-track"></div>
+                    </div>
+                    <div class="slider-group">
+                        <label>Height <span id="valHeight">12</span> ft</label>
+                        <input type="range" min="8" max="50" value="12" id="sliderHeight" oninput="updateDimension('height', this.value)">
+                        <div class="slider-track"></div>
+                    </div>
+                    <div class="slider-group">
+                        <label>Floors <span id="valFloors">2</span></label>
+                        <input type="range" min="1" max="20" value="2" id="sliderFloors" oninput="updateDimension('floors', this.value)">
+                        <div class="slider-track"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="viz-panel">
+                <h3 class="panel-title"><i class="fas fa-palette"></i> Materials</h3>
+                <div class="material-grid">
+                    <button class="material-cell active" data-material="brick" onclick="setMaterial('brick')">
+                        <div class="material-swatch" style="background: linear-gradient(135deg, #c75b39 0%, #a0442c 100%)"></div>
+                        <span>Brick</span>
+                    </button>
+                    <button class="material-cell" data-material="concrete" onclick="setMaterial('concrete')">
+                        <div class="material-swatch" style="background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%)"></div>
+                        <span>Concrete</span>
+                    </button>
+                    <button class="material-cell" data-material="bamboo" onclick="setMaterial('bamboo')">
+                        <div class="material-swatch" style="background: linear-gradient(135deg, #d4a574 0%, #a0826d 100%)"></div>
+                        <span>Bamboo</span>
+                    </button>
+                    <button class="material-cell" data-material="steel" onclick="setMaterial('steel')">
+                        <div class="material-swatch" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%)"></div>
+                        <span>Steel</span>
+                    </button>
+                    <button class="material-cell" data-material="mud" onclick="setMaterial('mud')">
+                        <div class="material-swatch" style="background: linear-gradient(135deg, #b8956a 0%, #8b7355 100%)"></div>
+                        <span>Mud/Adobe</span>
+                    </button>
+                    <button class="material-cell" data-material="wood" onclick="setMaterial('wood')">
+                        <div class="material-swatch" style="background: linear-gradient(135deg, #a0522d 0%, #6b3410 100%)"></div>
+                        <span>Teak Wood</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="viz-viewport">
+            <div class="viewport-canvas" id="viewportCanvas">
+                <div class="structure-preview" id="structurePreview">
+                    <div class="preview-wireframe" id="previewWireframe"></div>
+                    <div class="preview-dimensions" id="previewDimensions"></div>
+                </div>
+                <div class="viewport-controls">
+                    <button class="vp-btn" onclick="rotatePreview(-1)" title="Rotate left"><i class="fas fa-undo"></i></button>
+                    <button class="vp-btn" onclick="resetPreview()" title="Reset view"><i class="fas fa-compress-arrows-alt"></i></button>
+                    <button class="vp-btn" onclick="rotatePreview(1)" title="Rotate right"><i class="fas fa-redo"></i></button>
+                </div>
+            </div>
+            <div class="viz-readout">
+                <div class="readout-card">
+                    <div class="readout-label">Estimated Area</div>
+                    <div class="readout-value" id="readoutArea">1,200 sqft</div>
+                </div>
+                <div class="readout-card">
+                    <div class="readout-label">Total Volume</div>
+                    <div class="readout-value" id="readoutVolume">14,400 cuft</div>
+                </div>
+                <div class="readout-card">
+                    <div class="readout-label">Material Weight</div>
+                    <div class="readout-value" id="readoutWeight">~86 tons</div>
+                </div>
+                <div class="readout-card readout-card--highlight">
+                    <div class="readout-label">Base Estimate</div>
+                    <div class="readout-value" id="readoutCost">৳12,50,000</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LAYER 5: COST ESTIMATOR (Interactive Data Viz) ==================== -->
+<section class="section estimate-section" id="estimate">
+    <div class="section-header">
+        <div class="container">
+            <div class="header-meta">
+                <span class="section-index">03</span>
+                <div class="section-divider"></div>
+            </div>
+            <h2 class="section-title">Intelligent <span class="text-gradient">Estimator</span></h2>
+            <p class="section-subtitle">Real-time cost breakdown with district-wise material pricing</p>
+        </div>
+    </div>
+    
+    <div class="estimator-dashboard">
+        <div class="est-map-panel">
+            <div class="map-container" id="districtMap">
+                <!-- SVG Map of Bangladesh with interactive districts -->
+                <svg viewBox="0 0 400 500" class="bd-map">
+                    <defs>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+                    <!-- Simplified Bangladesh outline -->
+                    <path class="bd-outline" d="M120,20 Q180,5 220,15 Q280,10 320,30 Q360,50 370,90 Q375,130 360,170 Q350,210 365,250 Q375,290 360,330 Q340,370 350,410 Q360,450 340,480 Q300,490 260,485 Q220,480 180,485 Q140,490 100,480 Q60,470 40,430 Q20,390 30,350 Q40,310 25,270 Q10,230 20,190 Q30,150 50,110 Q70,70 95,45 Z"/>
+                    <!-- District hotspots -->
+                    <circle cx="180" cy="80" r="12" class="district-node" data-district="dhaka" onclick="selectDistrict('dhaka')"/>
+                    <circle cx="100" cy="140" r="10" class="district-node" data-district="rajshahi" onclick="selectDistrict('rajshahi')"/>
+                    <circle cx="280" cy="100" r="10" class="district-node" data-district="sylhet" onclick="selectDistrict('sylhet')"/>
+                    <circle cx="150" cy="200" r="10" class="district-node" data-district="khulna" onclick="selectDistrict('khulna')"/>
+                    <circle cx="220" cy="180" r="10" class="district-node" data-district="barisal" onclick="selectDistrict('barisal')"/>
+                    <circle cx="300" cy="220" r="10" class="district-node" data-district="chittagong" onclick="selectDistrict('chittagong')"/>
+                    <circle cx="120" cy="280" r="10" class="district-node" data-district="rangpur" onclick="selectDistrict('rangpur')"/>
+                    <circle cx="200" cy="300" r="10" class="district-node" data-district="mymensingh" onclick="selectDistrict('mymensingh')"/>
+                </svg>
+                <div class="map-tooltip" id="mapTooltip"></div>
+            </div>
+            <div class="district-info" id="districtInfo">
+                <div class="district-badge">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="selectedDistrict">Dhaka Division</span>
+                </div>
+                <div class="district-price-index">
+                    <span class="index-label">Price Index</span>
+                    <div class="index-bar">
+                        <div class="index-fill" id="priceIndexFill" style="width: 100%"></div>
+                    </div>
+                    <span class="index-value" id="priceIndexValue">Base (1.0x)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="est-breakdown-panel">
+            <div class="breakdown-header">
+                <h3>Cost Breakdown</h3>
+                <div class="breakdown-total">
+                    <span class="total-label">Total Estimate</span>
+                    <span class="total-value" id="estimateTotal">৳12,50,000</span>
+                </div>
+            </div>
+            <div class="breakdown-chart" id="breakdownChart">
+                <!-- Generated by JS -->
+            </div>
+            <div class="breakdown-legend" id="breakdownLegend">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LAYER 6: COMMUNITY (Artisan Network) ==================== -->
+<section class="section community-section" id="community">
+    <div class="section-header">
+        <div class="container">
+            <div class="header-meta">
+                <span class="section-index">04</span>
+                <div class="section-divider"></div>
+            </div>
+            <h2 class="section-title">Artisan <span class="text-gradient">Network</span></h2>
+            <p class="section-subtitle">Connect with master craftspeople preserving traditional techniques</p>
+        </div>
+    </div>
+    
+    <div class="community-grid" id="communityGrid">
+        <!-- Generated by JS -->
+    </div>
+</section>
+
+<!-- ==================== LAYER 7: MARKETPLACE ==================== -->
+<section class="section market-section" id="market">
+    <div class="section-header">
+        <div class="container">
+            <div class="header-meta">
+                <span class="section-index">05</span>
+                <div class="section-divider"></div>
+            </div>
+            <h2 class="section-title">Material <span class="text-gradient">Market</span></h2>
+            <p class="section-subtitle">Verified suppliers with transparent pricing and quality ratings</p>
+        </div>
+    </div>
+    
+    <div class="market-filters">
+        <div class="container">
+            <div class="filter-chips">
+                <button class="chip active" onclick="filterMarket('all', this)">All Materials</button>
+                <button class="chip" onclick="filterMarket('cement', this)">Cement</button>
+                <button class="chip" onclick="filterMarket('steel', this)">Steel</button>
+                <button class="chip" onclick="filterMarket('brick', this)">Brick</button>
+                <button class="chip" onclick="filterMarket('sand', this)">Sand & Stone</button>
+                <button class="chip" onclick="filterMarket('wood', this)">Timber</button>
+                <button class="chip" onclick="filterMarket('tiles', this)">Tiles</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="market-grid" id="marketGrid">
+            <!-- Generated by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- ==================== LAYER 8: FOOTER (Deep) ==================== -->
+<footer class="deep-footer">
+    <div class="footer-waves">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="currentColor" fill-opacity="0.03" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            <path fill="currentColor" fill-opacity="0.05" d="M0,256L48,245.3C96,235,192,213,288,192C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
+    </div>
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col footer-col--brand">
+                <div class="footer-brand">
+                    <div class="brand-glyph footer-glyph">
+                        <svg viewBox="0 0 40 40">
+                            <path d="M20 2 L38 12 L38 32 L20 38 L2 32 L2 12 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="20" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3>Nirman</h3>
+                        <span>নির্মাণ</span>
+                    </div>
+                </div>
+                <p class="footer-desc">Building the future while honoring the past. A generative platform for Bangladeshi architecture, construction, and cultural preservation.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#visualize">Visualizer</a></li>
+                    <li><a href="#estimate">Estimator</a></li>
+                    <li><a href="#heritage">Heritage Map</a></li>
+                    <li><a href="#community">Artisan Network</a></li>
+                    <li><a href="#market">Material Market</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Building Codes</a></li>
+                    <li><a href="#">Material Specs</a></li>
+                    <li><a href="#">Cost Database</a></li>
+                    <li><a href="#">API Docs</a></li>
+                    <li><a href="#">Open Source</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> House 42, Road 7, Gulshan, Dhaka</a></li>
+                    <li><a href="tel:+8809678123456"><i class="fas fa-phone"></i> +880 9678-123456</a></li>
+                    <li><a href="mailto:hello@nirman.build"><i class="fas fa-envelope"></i> hello@nirman.build</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Nirman (নির্মাণ). Crafted with <i class="fas fa-heart" style="color: var(--accent)"></i> in Bangladesh.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Accessibility</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== OVERLAY LAYERS ==================== -->
+<div class="spatial-menu" id="spatialMenu">
+    <div class="menu-backdrop" onclick="toggleSpatialMenu()"></div>
+    <div class="menu-panel">
+        <div class="menu-header">
+            <h3>Navigation</h3>
+            <button class="menu-close" onclick="toggleSpatialMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="menu-links">
+            <a href="#heritage" onclick="toggleSpatialMenu()"><span>01</span> Heritage</a>
+            <a href="#visualize" onclick="toggleSpatialMenu()"><span>02</span> Visualize</a>
+            <a href="#estimate" onclick="toggleSpatialMenu()"><span>03</span> Estimate</a>
+            <a href="#community" onclick="toggleSpatialMenu()"><span>04</span> Community</a>
+            <a href="#market" onclick="toggleSpatialMenu()"><span>05</span> Market</a>
+        </div>
+        <div class="menu-footer">
+            <div class="menu-status">
+                <span class="status-dot"></span>
+                <span>System Online</span>
+            </div>
+            <div class="menu-version">v2.4.0-beta</div>
+        </div>
+    </div>
+</div>
+
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+        <div class="loading-glyph">
+            <svg viewBox="0 0 40 40">
+                <path d="M20 2 L38 12 L38 32 L20 38 L2 32 L2 12 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+                <circle cx="20" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="1">
+                    <animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="3s" repeatCount="indefinite"/>
+                </circle>
+            </svg>
+        </div>
+        <div class="loading-text">Initializing spatial engine...</div>
+        <div class="loading-bar"><div class="loading-fill" id="loadingFill"></div></div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>'''
+
+with open('/mnt/agents/output/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_complex)
+
+print(f"index.html: {len(html_complex):,} chars")
